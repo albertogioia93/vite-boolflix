@@ -1,6 +1,7 @@
 <script>
 // LIBRERIE
 import axios from 'axios';
+
 // FUNZIONI
 import { store } from './store';
 import HelloApp from './components/HelloApp.vue';
@@ -39,6 +40,7 @@ export default {
           <h2>{{ movie.title }}</h2>
           <p>Titolo originale: {{ movie.original_title }}</p>
           <p>Lingua: {{ movie.original_language }}</p>
+          <!-- <p>Lingua: <Flag :code="movie.original_language"/></p> -->
           <p>Voto: {{ movie.vote_average }}</p>
         </li>
       </ul>
