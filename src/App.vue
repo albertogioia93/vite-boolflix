@@ -1,4 +1,6 @@
-<script>
+<!-- SOLUZIONE 1 -->
+
+<!-- <script>
 // LIBRERIE
 import axios from 'axios';
 
@@ -40,13 +42,69 @@ export default {
           <h2>{{ movie.title }}</h2>
           <p>Titolo originale: {{ movie.original_title }}</p>
           <p>Lingua: {{ movie.original_language }}</p>
-          <!-- <p>Lingua: <Flag :code="movie.original_language"/></p> -->
           <p>Voto: {{ movie.vote_average }}</p>
         </li>
       </ul>
     </div>
   </div>
+</template> -->
+
+<!-- SOLUZIONE 2 -->
+
+<script>
+// LIBRERIE
+import axios from 'axios';
+
+// FUNZIONI
+import { store } from './store';
+import HelloApp from './components/HelloApp.vue';
+
+export default {
+  name: 'App',
+  components: {
+    HelloApp
+  },
+  data() {
+    return {
+      store,
+      searchTerm: ''
+    }
+  },
+  methods: {
+    search() {
+      axios.get(this.store.config.urlMovie, {
+        params: {
+          api_key: this.store.config.apiKey,
+          language: this.store.config.defaultLang,
+          query: this.store.searchKey
+        }
+      }).then(response => {
+        this.store.movies = response.data.results;
+      });
+    }
+  },
+}
+</script>
+
+<template>
+  
+  <header>
+    <input type="text" placeholder="Cerca film..." v-model="store.searchKey">
+    <button @click="search">Cerca</button>
+  </header>
+
+  <main>
+    <ul>
+      <li v-for="movie in store.movies">
+        <!-- passo solo una props (:info) e deciderà lei quali campi di helloapp riempire in base all'oggetto che riceve -->
+        <HelloApp :info="movie"/>
+      </li>
+    </ul>
+  </main>
+    
 </template>
+
+
 
 <style lang="scss">
 // versione 1 - via app.vue

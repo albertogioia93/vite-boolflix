@@ -1,49 +1,18 @@
-<!-- <script>
-import axios from 'axios';
-export default {
-    name: 'Hello'
-}
-</script>
-
-<template>
-    <div>
-        <h1>Template Iniziale</h1>
-
-    </div>
-</template>
-
-
-<style lang="scss" scoped></style> -->
-
-
 <script>
-
-export default {
-    name: 'Flag',
-    props: {
-        code: {
-            type: String,
-            required: true
-        }
-    },
-    computed: {
-        flag() {
-            if (this.code) {
-                // Mappa dei codici delle nazioni ai nomi delle bandiere
-                const flags = {
-                    'en': 'us',
-                    'it': 'it'
-                    // Aggiungere altre mappature qui...
-                };
-                return flags[this.code.toLowerCase()] || '';
-            }
-            return '';
+    export default {
+        name: 'Hello',
+        props: {
+            info: Object
         }
     }
-}
 </script>
 
 <template>
-    <span v-if="flag" :class="'flag-icon flag-icon-' + flag"></span>
-    <span v-else></span>
+    <article>
+        <h3>{{ info.title }}</h3>
+        <h4>Titolo originale: {{ info.original_title }}</h4>
+        <div>Lingua: {{ info.original_language }}</div>
+        <div>Voto: {{ info.vote_average }}</div>
+    </article>
 </template>
+
