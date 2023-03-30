@@ -71,37 +71,90 @@ export default {
     }
   },
   methods: {
-    search() {
+    // search() {
+    //   axios.get(this.store.config.urlMovie, {
+    //     params: {
+    //       api_key: this.store.config.apiKey,
+    //       language: this.store.config.defaultLang,
+    //       query: this.store.searchKey
+    //     }
+    //   }).then(response => {
+    //     this.store.movies = response.data.results;
+    //   });
+    // },
+    // // MODIFICA 1
+    // searchTvshow() {
+    //   axios.get(this.store.config.urlTvshow, {
+    //     params: {
+    //       api_key: this.store.config.apiKey,
+    //       language: this.store.config.defaultLang,
+    //       query: this.store.searchKey
+    //     }
+    //   }).then(response => {
+    //     this.store.tvshow = response.data.results;
+    //   });
+    // }
+    // // FINE MODIFICA 1
+
+    searchAll() {
+      // esegui la chiamata API per cercare i film
       axios.get(this.store.config.urlMovie, {
         params: {
           api_key: this.store.config.apiKey,
           language: this.store.config.defaultLang,
           query: this.store.searchKey
         }
-      }).then(response => {
-        this.store.movies = response.data.results;
+      }).then(movieResponse => {
+        // esegui la chiamata API per cercare le serie TV
+        axios.get(this.store.config.urlTvshow, {
+          params: {
+            api_key: this.store.config.apiKey,
+            language: this.store.config.defaultLang,
+            query: this.store.searchKey
+          }
+        }).then(tvshowResponse => {
+          // unisci i risultati delle due chiamate API in un unico array
+          const movies = movieResponse.data.results;
+          const tvshows = tvshowResponse.data.results;
+          const allResults = movies.concat(tvshows);
+          // salva i risultati nella variabile tvshow dello store
+          this.store.tvshow = allResults;
+        });
       });
     }
+
   },
+
 }
 </script>
 
 <template>
-  
   <header>
-    <input type="text" placeholder="Cerca film..." v-model="store.searchKey">
-    <button @click="search">Cerca</button>
+    <!-- <input type="text" placeholder="Cerca film..." v-model="store.searchKey"> -->
+    <input type="text" placeholder="Cerca film o serie TV..." v-model="store.searchKey">
+    <!-- <button @click="search">Cerca</button> -->
+
+    <!-- HO AGGIUNTO QUESTO BUTTON searchTvshow -->
+    <!-- <button @click="searchTvshow">Cerca serie TV</button> -->
+
+    <!-- HO AGGIUNTO QUESTO BUTTON PER CERCARE ENTRAMBI -->
+    <button @click="searchAll">Cerca</button>
   </header>
 
   <main>
     <ul>
       <li v-for="movie in store.movies">
         <!-- passo solo una props (:info) e deciderà lei quali campi di helloapp riempire in base all'oggetto che riceve -->
-        <HelloApp :info="movie"/>
+        <HelloApp :info="movie" />
       </li>
+
+      <!-- HO AGGIUNTO LI TVSHOW -->
+      <li v-for="tvshow in store.tvshow">
+        <HelloApp :info="tvshow" />
+      </li>
+
     </ul>
   </main>
-    
 </template>
 
 
