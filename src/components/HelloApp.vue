@@ -32,19 +32,18 @@ export default {
 </script>
 
 <template>
-    <article>
+    <!-- <article>
         <h3>{{ info.title }}</h3>
         <h4>Titolo originale: {{ info.original_title }}</h4>
-        <!-- con quella funzione le bandierine del pacchetto delle flags si adattano al luogo switchato dalla lingua -->
         <div>Lingua: {{ getLanguage }}</div>
         <country-flag :country='getLanguage' size='normal' />
         <div>Voto: {{ getVote }}</div>
         <font-awesome-icon icon="fa-solid fa-star" v-for="n in getVote" />
         <font-awesome-icon icon="fa-regular fa-star" v-for="n in 5 - getVote" />
-    </article>
-
+    </article> -->
+    
     <!-- STO AGGIUNGENDO STO ARTICLE DEDICATO ALLE SERIE TV-->
-    <article>
+    <!-- <article>
         <h3>{{ info.name }}</h3>
         <h4>Titolo originale: {{ info.original_name }}</h4>
         <div>Lingua: {{ getLanguage }}</div>
@@ -52,7 +51,26 @@ export default {
         <div>Voto: {{ getVote }}</div>
         <font-awesome-icon icon="fa-solid fa-star" v-for="n in getVote" />
         <font-awesome-icon icon="fa-regular fa-star" v-for="n in 5 - getVote" />
+    </article> -->
+
+    <!-- UNIONE DEI 2 ARTICLE CON 'OR' -->
+    
+    <article>
+
+        <h3>{{ info.title || info.name }}</h3>
+        <h4>Titolo originale: {{ info.original_title || info.original_name }}</h4>
+        <div>Lingua: {{ getLanguage }}</div>
+        <country-flag :country='getLanguage' size='normal' />
+        <!-- con quella funzione (getVote) le bandierine del pacchetto delle flags si adattano al luogo switchato dalla lingua -->
+        <div>Voto: {{ getVote }}</div>
+        <font-awesome-icon icon="fa-solid fa-star" v-for="n in getVote" />
+        <font-awesome-icon icon="fa-regular fa-star" v-for="n in 5 - getVote" />
+        
     </article>
+
+    <!-- Concateno l'URL base delle immagini di TMDB con una dimensione (w185 ad esempio) e la parte finale dell'URL della copertina del film o della serie passata dall'API, utilizzando la direttiva v-bind (:src) per inserire l'immagine come attributo src dell'elemento img. -->
+    <img :src="'https://image.tmdb.org/t/p/w185' + info.poster_path" v-if="info.poster_path" />
+    <!-- La condizione v-if assicura di mostrare l'immagine solo se l'API passa un URL valido per la copertina. -->
 
 </template>
 

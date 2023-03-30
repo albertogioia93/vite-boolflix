@@ -9,7 +9,7 @@
 
 
 // **********************************
-// soluzione 2
+// SOLUZIONE 2 CON LINK E API_KEY INIZIALIZZATI IN VARIABILI PER NON DOVERLI RISCRIVERE OGNI VOLTA
 // **********************************
 
 import { reactive } from "vue";
