@@ -9,8 +9,8 @@ import CountryFlag from 'vue-country-flag-next'
         props: {
             info: Object
         },
-        // creo una funzione per il caso delle lingue uguali parlate in più luoghi
         computed: {
+            // creo una funzione per il caso delle lingue uguali parlate in più luoghi
             getLanguage() {
                 switch (this.info.original_language) {
                     case 'en':
@@ -20,6 +20,12 @@ import CountryFlag from 'vue-country-flag-next'
                     default:
                         return this.info.original_language
                 }
+            },
+            // creo una funzione che prima divide il numero per 2 (devo cambiare i voti da 0 a 10 di default dell'api, per visualizzarli da 0 a 5)
+            getVote() {
+                // return this.info.vote_average / 2;
+                return Math.ceil(this.info.vote_average / 2);
+                // con Math.ceil arrotondo
             }
         }
     }
@@ -32,7 +38,7 @@ import CountryFlag from 'vue-country-flag-next'
         <!-- con quella funzione le bandierine del pacchetto delle flags si adattano al luogo switchato dalla lingua -->
         <div>Lingua: {{ getLanguage }}</div>
         <country-flag :country='getLanguage' size='normal'/>
-        <div>Voto: {{ info.vote_average }}</div>
+        <div>Voto: {{ getVote }}</div>
     </article>
 </template>
 
