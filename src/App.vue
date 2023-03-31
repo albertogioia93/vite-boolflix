@@ -130,6 +130,7 @@ export default {
 
 <template>
   <header>
+    <h1>BOOLFLIX</h1>
     <!-- <input type="text" placeholder="Cerca film..." v-model="store.searchKey"> -->
     <input type="text" placeholder="Cerca film o serie TV..." v-model="store.searchKey">
     <!-- <button @click="search">Cerca</button> -->
@@ -141,7 +142,7 @@ export default {
     <button @click="searchAll">Cerca</button>
   </header>
 
-  <main>
+  <main class="container">
     <ul>
       <li v-for="movie in store.movies">
         <!-- passo solo una props (:info) e deciderà lei quali campi di helloapp riempire in base all'oggetto che riceve -->
@@ -162,5 +163,29 @@ export default {
 <style lang="scss">
 // versione 1 - via app.vue
 // @use './assets/scss/main.scss' as *;
+header {
+  padding: 100px;
+  text-align: center;
+  background-color: black;
+}
+
+h1 {
+  font-size: 50px;
+  color: red;
+  margin-bottom: 30px;
+}
+
+.container {
+  padding: 100px;
+}
+
+ul {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+li {
+  margin: 20px;
+}
 </style>
 
