@@ -175,6 +175,21 @@ h1 {
   margin-bottom: 30px;
 }
 
+input {
+  width: 500px;
+  height: 40px;
+  border-style: none;
+  border-radius: 10px;
+  margin: 10px;
+}
+
+button {
+  width: 100px;
+  height: 40px;
+  border-style: none;
+  border-radius: 10px;
+}
+
 .container {
   padding: 100px;
 }
