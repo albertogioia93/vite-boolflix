@@ -54,23 +54,53 @@ export default {
     </article> -->
 
     <!-- UNIONE DEI 2 ARTICLE CON 'OR' -->
+    <div class="card">
+
+        <article>
     
-    <article>
-
-        <h3>{{ info.title || info.name }}</h3>
-        <h4>Titolo originale: {{ info.original_title || info.original_name }}</h4>
-        <div>Lingua: {{ getLanguage }}</div>
-        <country-flag :country='getLanguage' size='normal' />
-        <!-- con quella funzione (getVote) le bandierine del pacchetto delle flags si adattano al luogo switchato dalla lingua -->
-        <div>Voto: {{ getVote }}</div>
-        <font-awesome-icon icon="fa-solid fa-star" v-for="n in getVote" />
-        <font-awesome-icon icon="fa-regular fa-star" v-for="n in 5 - getVote" />
-        
-    </article>
-
-    <!-- Concateno l'URL base delle immagini di TMDB con una dimensione (w185 ad esempio) e la parte finale dell'URL della copertina del film o della serie passata dall'API, utilizzando la direttiva v-bind (:src) per inserire l'immagine come attributo src dell'elemento img. -->
-    <img :src="'https://image.tmdb.org/t/p/w185' + info.poster_path" v-if="info.poster_path" />
-    <!-- La condizione v-if assicura di mostrare l'immagine solo se l'API passa un URL valido per la copertina. -->
+            <h3>{{ info.title || info.name }}</h3>
+            <h4>Titolo originale: {{ info.original_title || info.original_name }}</h4>
+            <div>Lingua: {{ getLanguage }}</div>
+            <country-flag :country='getLanguage' size='normal' />
+            <!-- con quella funzione (getVote) le bandierine del pacchetto delle flags si adattano al luogo switchato dalla lingua -->
+            <div>Voto: {{ getVote }}</div>
+            <font-awesome-icon icon="fa-solid fa-star" v-for="n in getVote" />
+            <font-awesome-icon icon="fa-regular fa-star" v-for="n in 5 - getVote" />
+            
+        </article>
+    
+        <!-- Concateno l'URL base delle immagini di TMDB con una dimensione (w185 ad esempio) e la parte finale dell'URL della copertina del film o della serie passata dall'API, utilizzando la direttiva v-bind (:src) per inserire l'immagine come attributo src dell'elemento img. -->
+        <img :src="'https://image.tmdb.org/t/p/w185' + info.poster_path" v-if="info.poster_path" />
+        <!-- La condizione v-if assicura di mostrare l'immagine solo se l'API passa un URL valido per la copertina. -->
+    </div>
 
 </template>
+
+<style lang="scss">
+article {
+    display: none;
+}
+
+.card {
+  position: relative;
+}
+
+.card:hover article {
+  display: block;
+}
+
+.card article {
+  display: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.8);
+  color: #fff;
+  padding: 20px;
+  box-sizing: border-box;
+//   text-align: center;
+}
+</style>
 

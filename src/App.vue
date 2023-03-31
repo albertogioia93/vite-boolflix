@@ -197,6 +197,7 @@ button {
 ul {
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
 }
 
 li {
