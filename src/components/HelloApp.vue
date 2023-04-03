@@ -70,7 +70,7 @@ export default {
         </article>
     
         <!-- Concateno l'URL base delle immagini di TMDB con una dimensione (w185 ad esempio) e la parte finale dell'URL della copertina del film o della serie passata dall'API, utilizzando la direttiva v-bind (:src) per inserire l'immagine come attributo src dell'elemento img. -->
-        <img :src="'https://image.tmdb.org/t/p/w185' + info.poster_path" v-if="info.poster_path" />
+        <img :src="'https://image.tmdb.org/t/p/w342' + info.poster_path" v-if="info.poster_path" />
         <!-- La condizione v-if assicura di mostrare l'immagine solo se l'API passa un URL valido per la copertina. -->
     </div>
 
